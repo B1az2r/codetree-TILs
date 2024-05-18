@@ -19,4 +19,4 @@ for i in range(1, n+1):
         if(i % 3 == 0):
             way += 1
 
-    print(cls, way, wc)
+print(cls, way, wc)
