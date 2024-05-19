@@ -1,7 +1,8 @@
 n = int(input())
 odd = 0
 
-for i in range(1, n+1):
-    if(i % 2 == 1 and i % 3 == 0):
-        odd += i
+for _ in range(1, n+1):
+    a = int(input())
+    if(a % 2 == 1 and a % 3 == 0):
+        odd += a
 print(odd)
