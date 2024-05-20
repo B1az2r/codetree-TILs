@@ -16,4 +16,4 @@ for i in range(a, b+1):
 if(cnt >= 1):
     print("YES")
 else:
-    print("No")
+    print("NO")
