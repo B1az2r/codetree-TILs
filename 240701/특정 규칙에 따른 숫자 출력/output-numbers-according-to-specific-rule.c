@@ -6,20 +6,19 @@ int main(){
     scanf("%d", &n);
     int cnt = 1;
 
-    for(int i = 0; i < n; i++){
-        
-        for(int j = 0; j < i; j++){
-            printf("  ");
+    for(int i = n; i >= 1; i--){
+        for(int j = n; j >= 1; j--){
+            if(j > i){
+                printf("  ");
         }
-
-        for(int j = 0; j < n-i; j++){
-            printf("%d ", cnt);
-            cnt++;
-            if(cnt > 9){
+            else{
+                printf("%d ", cnt);
+                cnt++;
+            }
+            if(cnt == 10){
                 cnt = 1;
             }
         }
-        
         printf("\n");
     }
 
