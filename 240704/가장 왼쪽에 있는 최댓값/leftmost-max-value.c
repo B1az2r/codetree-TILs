@@ -3,7 +3,7 @@
 int main() {
     int n;
     scanf("%d", &n);
-    int arr[100];  // 배열 크기는 문제의 범위에 따라 조정 가능합니다.
+    int arr[1000];  // 배열 크기는 문제의 범위에 따라 조정 가능합니다.
 
     for (int i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
