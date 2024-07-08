@@ -8,10 +8,19 @@ int main(){
     scanf("%s", arr);
     scanf("%d", &n);
     int len = strlen(arr);
+    
 
-    for(int i = len-1; i >= len-n; i--){
-        printf("%c", arr[i]);
+    if(len < n){
+        for(int i = len-1; i >= 0; i--){
+            printf("%c", arr[i]);
+        }
     }
+    else{
+        for(int i = len - 1; i >= len-n; i--){
+            printf("%c", arr[i]);
+        }
+    }
+
 
     return 0;
 }
