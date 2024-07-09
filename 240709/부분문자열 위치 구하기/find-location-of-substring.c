@@ -2,9 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-
-int main(){
-
+int main() {
     char arr[1001];
     char inp[1001];
 
@@ -16,26 +14,25 @@ int main(){
     int cnt = -1;
     bool exist = false;
 
-    for(int i = 0; i < len_arr - 1; i++){
-        bool match = false;
-        for(int j = 0; j < len_inp; j++){
-            if(arr[i] == inp[j] && arr[i+1] == inp[j+1]){
-                match = true;
+    for (int i = 0; i <= len_arr - len_inp; i++) {
+        bool match = true;
+        for (int j = 0; j < len_inp; j++) {
+            if (arr[i + j] != inp[j]) {
+                match = false;
                 break;
             }
         }
-        if(match){
+        if (match) {
             exist = true;
             cnt = i;
             break;
         }
     }
 
-    if(exist == false){
-        printf("-1");
-    }
-    else{
-        printf("%d", cnt);
+    if (!exist) {
+        printf("-1\n");
+    } else {
+        printf("%d\n", cnt);
     }
 
     return 0;
