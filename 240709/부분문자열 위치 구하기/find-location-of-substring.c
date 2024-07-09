@@ -13,23 +13,29 @@ int main(){
 
     int len_arr = strlen(arr);
     int len_inp = strlen(inp);
-    int cnt = 0;
+    int cnt = -1;
     bool exist = false;
 
     for(int i = 0; i < len_arr - 1; i++){
+        bool match = false;
         for(int j = 0; j < len_inp; j++){
             if(arr[i] == inp[j] && arr[i+1] == inp[j+1]){
-                exist = true;
-                cnt++;
+                match = true;
+                break;
             }
+        }
+        if(match){
+            exist = true;
+            cnt = i;
+            break;
         }
     }
 
-    if(exist == true){
-        printf("%d", cnt);
-    }
-    else if(exist == false){
+    if(exist == false){
         printf("-1");
+    }
+    else{
+        printf("%d", cnt);
     }
 
     return 0;
