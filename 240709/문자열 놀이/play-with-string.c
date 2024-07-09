@@ -9,32 +9,35 @@ int main(){
     int len = strlen(arr);
 
     for(int i = 0; i < q; i++){
+
         int n;
-        char a1, b1;
-        scanf("%d %c %c", &n, &a1, &b1);
+        scanf("%d", &n);
 
         if(n == 1){
-            int index_a = a1 - '1';
-            int index_b = b1 - '1';
+            int a, b;
+            scanf("%d %d", &a, &b);
 
-            if(index_a >= 0 && index_a < len && index_b < len && index_b >= 0){
-                char temp = arr[index_a];
-                arr[index_a] = arr[index_b];
-                arr[index_b] = temp;
+            char temp = arr[b-1];
+            arr[b-1] = arr[a-1];
+            arr[a-1] = temp;
+
+            printf("%s\n", arr);
             }
-        }
+
+        
         else if(n == 2){
-            for(int j = 0; j < len; j++){
-                if(arr[j] == a1){
-                    arr[j] = b1;
+
+            char a, b;
+            scanf(" %c %c", &a, &b);
+            
+            for(int j = 0; arr[j] != '\0'; j++){
+                if(arr[j] == a){
+                    arr[j] = b;
                 }
             }
+            printf("%s\n", arr);
         }
-        printf("%s\n", arr);
-        
     }
-
-
 
     return 0;
 }
