@@ -13,10 +13,14 @@ int main(){
 }
 
 int Minimum(int a, int b, int c){
-    int min = a;
 
-    if(a <= b && a <= c){
-        return a;
+    if(a <= b && c <= b){
+        if(a < c){
+            return a;
+        }
+        else if(a >= c){
+            return c;
+        }
     }
     else if(b <= a && c <= a){
         if(b < c){
@@ -24,6 +28,14 @@ int Minimum(int a, int b, int c){
         }
         else if(b >= c){
             return c;
+        }
+    }
+    else if(a <= c && b <= c){
+        if(a < b){
+            return a;
+        }
+        else if(a >= b){
+            return b;
         }
     }
 }
