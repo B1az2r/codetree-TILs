@@ -13,29 +13,15 @@ int main(){
 }
 
 int Minimum(int a, int b, int c){
+    int min = a;
+    
+    if(min > b){
+        min = b;
+    }
+    if(min > c){
+        min = c;
+    }
 
-    if(a <= b && c <= b){
-        if(a < c){
-            return a;
-        }
-        else if(a >= c){
-            return c;
-        }
-    }
-    else if(b <= a && c <= a){
-        if(b < c){
-            return b;
-        }
-        else if(b >= c){
-            return c;
-        }
-    }
-    else if(a <= c && b <= c){
-        if(a < b){
-            return a;
-        }
-        else if(a >= b){
-            return b;
-        }
-    }
+    return min;
+
 }
