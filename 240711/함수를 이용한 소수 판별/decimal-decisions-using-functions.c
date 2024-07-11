@@ -29,8 +29,8 @@ bool Prime(int num){
         if(num % i == 0){
             return false;
         }
-        return true;
     }
+    return true;
 }
 
 int Prime_sum(int a, int b){
