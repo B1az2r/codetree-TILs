@@ -15,7 +15,7 @@ int main(){
     else{
         printf("No");
     }
-    
+
     return 0;
 }
 
@@ -35,10 +35,12 @@ int Max_date(int m){
 }
 
 bool Date(int m, int d){
-    if(d > Max_date(m)){
+    if(m < 1 || m > 12){
         return false;
     }
-    else{
-        return true;
+
+    if((d < 1) || d > Max_date(m)){
+        return false;
     }
+    return true;
 }
