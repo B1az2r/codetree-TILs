@@ -9,7 +9,6 @@ int main(){
 
     Calc(&a, &b);
 
-    printf("%d %d", b, a);
 
     return 0;
 }
@@ -21,12 +20,15 @@ void Calc(int *a, int *b){
     if(temp_a > temp_b){
         *a = temp_a + 25;
         *b = temp_b * 2;
+        printf("%d %d", *a, *b);
     }    
 
     else{
         *a = temp_b + 25;
         *b = temp_a * 2;
+        printf("%d %d", *b, *a);
     }
+
 
 
 }
