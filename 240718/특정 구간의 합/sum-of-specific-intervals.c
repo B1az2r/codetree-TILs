@@ -1,11 +1,11 @@
 #include <stdio.h>
-int a[100];
+int a[101];
 int result(int * arr);
 int main() {
     // 여기에 코드를 작성해주세요.
     int n, m, i, j;
     scanf("%d %d", &n, &m);
-    int b[100]={0};
+    int b[101]={0};
     for (i=0; i<n; i++)
     {
         scanf("%d ", &a[i]);
@@ -13,7 +13,6 @@ int main() {
     for (j=0; j<m*2; j=j+2)
     {
         scanf("%d %d", &b[j], &b[j+1]);
-        scanf("\n");
         
     }
     result(b);
