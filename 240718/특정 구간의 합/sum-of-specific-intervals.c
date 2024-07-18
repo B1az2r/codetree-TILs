@@ -1,44 +1,36 @@
 #include <stdio.h>
-int a[101];
-int result(int * arr);
+int a[100];
+void result(int *arr, int cnt); // 반환값을 void로 수정
+
 int main() {
-    // 여기에 코드를 작성해주세요.
     int n, m, i, j;
     scanf("%d %d", &n, &m);
-    int b[101]={0};
-    for (i=0; i<n; i++)
-    {
-        scanf("%d ", &a[i]);
+    int b[100] = {0}; // 범위 배열 초기화
+
+    // 배열 a 입력
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
     }
-    for (j=0; j<m*2; j=j+2)
-    {
-        scanf("%d %d", &b[j], &b[j+1]);
-        
+
+    // 범위 입력
+    for (j = 0; j < m * 2; j += 2) {
+        scanf("%d %d", &b[j], &b[j + 1]);
     }
-    result(b);
+
+    result(b, m * 2); // 범위의 수를 전달
     return 0;
 }
 
-int result(int * arr)
-{
-    int cnt=0, i, j, res=0, k;
-    for(i=0; i<100; i++)
-    {
-        if(arr[i]>0)
-        {
-            cnt++;
-        }
-    }
+void result(int *arr, int cnt) {
+    int res = 0, j, k;
 
-    for(j=0; j<cnt; j=j+2)
-    {
-        for(k=arr[j]; k<=arr[j+1]; k++)
-        {
-            res += a[k-1];
+    for (j = 0; j < cnt; j += 2) {
+        for (k = arr[j]; k <= arr[j + 1]; k++) {
+            if (k > 0 && k <= 100) { // 유효한 인덱스 범위 내에서 접근
+                res += a[k - 1];
+            }
         }
-        
         printf("%d\n", res);
-        res=0;
+        res = 0;
     }
-    return res;
 }
