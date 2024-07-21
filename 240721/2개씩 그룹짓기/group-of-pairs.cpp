@@ -2,12 +2,12 @@
 #include <algorithm>
 
 using namespace std;
-int result;
+int result = 0;
 
 int main(){
 
     int n;
-    int arr[1001];
+    int arr[2001];
 
     cin.tie(0) -> sync_with_stdio(0);
 
