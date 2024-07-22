@@ -22,7 +22,13 @@ class Meeting {
 
 int main(){
 
-    Meeting meet1 = Meeting("codetree", 'L', 13);
+    string code;
+    char place;
+    int time;
+
+    cin >> code >> place >> time;
+
+    Meeting meet1(code, place, time);
     cout << "secret code : " << meet1.code << endl;  
     cout << "meeting point : " << meet1.place << endl;
     cout << "time : " << meet1.time << endl;
