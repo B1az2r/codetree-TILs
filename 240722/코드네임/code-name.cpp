@@ -30,14 +30,11 @@ int main(){
         agents[i] = Agent(codename, score);
     }
 
-    char min_codename;
-    int min;
+    char min_codename = agents[0].codename;
+    int min = agents[0].score;
 
 
-    for(int i = 0; i < 5; i++){
-        min = agents[0].score;
-        min_codename = agents[0].codename;
-
+    for(int i = 1; i < 5; i++){
         if(min > agents[i].score){
             min = agents[i].score;
             min_codename = agents[i].codename;
