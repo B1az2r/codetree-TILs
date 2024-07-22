@@ -4,21 +4,6 @@
 
 using namespace std;
 
-class People {
-    public:
-    string name;
-    string address;
-    string region;
-    
-    People () {}
-
-    People(string name, string address, string region){
-        this->name = name;
-        this->address = address;
-        this->region = region;
-    }
-};
-
 
 class Data {
     public:
@@ -32,11 +17,9 @@ class Data {
         this->weather = weather;
     }
     Data () {}
-
-    bool operator<(const Data &other) const{
-        return date < other.date;
-    }
 };
+
+Data ans = Data("9999-99-99", "", "");
 
 int main(){
 
@@ -51,15 +34,16 @@ int main(){
         datas[i] = Data(date, day, weather);
     }
 
-    sort(datas, datas + n);
 
     for(int i = 0; i < n; i++){
         if(datas[i].weather == "Rain"){
-            cout << datas[i].date << " " << datas[i].day << " " << datas[i].weather << endl;
-            break;
+            if(ans.date >= datas[i].date){
+                ans = datas[i];
+            }
         }
     }
 
+    cout << ans.date << " " << ans.day << " " << ans.weather;
 
     return 0;
 }
