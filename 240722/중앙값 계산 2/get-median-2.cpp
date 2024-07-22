@@ -1,58 +1,28 @@
 #include <iostream>
-#include <queue>
-#include <vector>
+#include <algorithm>
+
+#define MAX_N 100
 
 using namespace std;
 
-// 최대 힙을 위한 비교 함수
-class CompareMax {
-public:
-    bool operator()(int a, int b) {
-        return a < b;
-    }
-};
-
-// 최소 힙을 위한 비교 함수
-class CompareMin {
-public:
-    bool operator()(int a, int b) {
-        return a > b;
-    }
-};
+// 변수 선언
+int n;
+int arr[MAX_N];
 
 int main() {
-    int n;
+    // 입력:
     cin >> n;
-    vector<int> numbers(n);
-
-    for (int i = 0; i < n; ++i) {
-        cin >> numbers[i];
-    }
-
-    priority_queue<int, vector<int>, CompareMax> maxHeap; // 최대 힙
-    priority_queue<int, vector<int>, CompareMin> minHeap; // 최소 힙
-
-    for (int i = 0; i < n; ++i) {
-        if (maxHeap.empty() || numbers[i] <= maxHeap.top()) {
-            maxHeap.push(numbers[i]);
-        } else {
-            minHeap.push(numbers[i]);
-        }
-
-        // 균형 유지
-        if (maxHeap.size() > minHeap.size() + 1) {
-            minHeap.push(maxHeap.top());
-            maxHeap.pop();
-        } else if (minHeap.size() > maxHeap.size()) {
-            maxHeap.push(minHeap.top());
-            minHeap.pop();
-        }
-
-        // 홀수 번째 원소일 때 중앙값 출력
-        if (i % 2 == 0) {
-            cout << maxHeap.top() << " ";
+    for(int i = 0; i < n; i++)
+        cin >> arr[i];
+    
+    // 홀수 번째 수를 지날때마다 정렬을 진행한 후 가운데 값을 출력합니다.
+    for(int i = 0; i < n; i++) {
+        if(i % 2 == 0) {
+            // 오름차순 정렬을 진행합니다.
+            sort(arr, arr + i + 1);
+            // 가운데 값을 출력합니다.
+            cout << arr[i / 2] << " ";
         }
     }
-
     return 0;
 }
