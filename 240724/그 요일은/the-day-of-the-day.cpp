@@ -1,77 +1,58 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 
 using namespace std;
 
-// 각 달의 일수를 저장하는 배열 (윤년)
-int daysInMonth[] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-// 요일 배열
-string dayOfWeek[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-
-// 두 날짜 사이의 일 수를 계산하는 함수
-int calculateDaysBetween(int m1, int d1, int m2, int d2) {
-    int days = 0;
+int NumOfDays(int m, int d) {
+    // 계산 편의를 위해 월마다 몇 일이 있는지를 적어줍니다. 
+    int days[13] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int total_days = 0;
     
-    if (m1 == m2) {
-        days = d2 - d1;
-    } else {
-        // 첫 번째 달의 남은 일수
-        days += daysInMonth[m1] - d1;
-        
-        // 중간의 모든 달
-        for (int i = m1 + 1; i < m2; i++) {
-            days += daysInMonth[i];
-        }
-        
-        // 두 번째 달의 일수
-        days += d2;
-    }
+    // 1월부터 (m - 1)월 까지는 전부 꽉 채워져 있습니다.
+    for(int i = 1; i < m; i++)
+        total_days += days[i];
     
-    return days;
-}
-
-// 주어진 요일의 인덱스를 찾는 함수
-int findDayIndex(string day) {
-    for (int i = 0; i < 7; i++) {
-        if (dayOfWeek[i] == day) {
-            return i;
-        }
-    }
-    return -1; // Should not happen if input is always valid
+    // m월의 경우에는 정확히 d일만 있습니다.
+    total_days += d;
+    
+    return total_days;
 }
 
 int main() {
+    // 변수 선언 및 입력
     int m1, d1, m2, d2;
-    string A;
     cin >> m1 >> d1 >> m2 >> d2;
+    string A;
     cin >> A;
 
-    // 2024년 m1월 d1일이 월요일이면
-    string startDay = "Mon";
-    int startDayIndex = 0; // Mon corresponds to index 0
+    // 첫 날짜와 두 번째 날짜 사이의 일 수를 계산
+    int start_days = NumOfDays(m1, d1);
+    int end_days = NumOfDays(m2, d2);
+    int diff = end_days - start_days;
 
-    // 두 날짜 사이의 일 수 계산
-    int daysBetween = calculateDaysBetween(m1, d1, m2, d2);
+    // 입력된 요일을 요일 배열의 인덱스로 변환
+    string day_of_week[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    int A_index = 0;
+    for(int i = 0; i < 7; i++) {
+        if(day_of_week[i] == A) {
+            A_index = i;
+            break;
+        }
+    }
 
-    // 주어진 요일의 인덱스
-    int targetDayIndex = findDayIndex(A);
+    // 첫 번째 날짜의 요일 인덱스 (월요일은 0번째 인덱스)
+    int start_day_index = 0;
 
-    // 첫 번째 날짜의 요일 계산
-    int firstDayIndex = (startDayIndex + ((d1 - 1) % 7)) % 7;
-
-    // 두 번째 날짜의 요일 계산
-    int totalOccurrences = 0;
-    for (int i = 0; i <= daysBetween; i++) {
-        int currentDayIndex = (firstDayIndex + i) % 7;
-        if (currentDayIndex == targetDayIndex) {
-            totalOccurrences++;
+    // 요일의 총 횟수 계산
+    int total_count = 0;
+    for(int i = 0; i <= diff; i++) {
+        if((start_day_index + i) % 7 == A_index) {
+            total_count++;
         }
     }
 
     // 결과 출력
-    cout << totalOccurrences << endl;
+    cout << total_count << endl;
 
     return 0;
 }
