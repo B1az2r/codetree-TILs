@@ -10,13 +10,9 @@ int main(){
     int now_hour = 11;
     int now_min = 11;
 
-    if(a <= now_day){
-        if(b <= now_hour){
-            if(c < now_min){
-                cout << "-1" << endl;
-                return 0;
-            }
-        }
+    if(a < now_day || (a == now_day && b < now_hour) || (a == now_day && b == now_hour && c < now_min)){
+        cout << "-1" << endl;
+        return 0;
     }
 
     int min = 0;
