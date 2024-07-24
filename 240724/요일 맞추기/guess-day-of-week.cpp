@@ -1,54 +1,37 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 
 using namespace std;
 
-// 각 달의 일수를 저장하는 배열
-int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-// 요일 배열
-string dayOfWeek[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-
-// 두 날짜 사이의 일 수를 계산하는 함수
-int calculateDaysBetween(int m1, int d1, int m2, int d2) {
-    int days = 0;
+int NumOfDays(int m, int d) {
+    // 계산 편의를 위해 월마다 몇 일이 있는지를 적어줍니다. 
+    int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int total_days = 0;
     
-    // 같은 달인 경우
-    if (m1 == m2) {
-        days = d2 - d1;
-    } else {
-        // 첫 번째 달의 남은 일수
-        days += daysInMonth[m1] - d1;
-        
-        // 중간의 모든 달
-        for (int i = m1 + 1; i < m2; i++) {
-            days += daysInMonth[i];
-        }
-        
-        // 두 번째 달의 일수
-        days += d2;
-    }
+    // 1월부터 (m - 1)월 까지는 전부 꽉 채워져 있습니다.
+    for(int i = 1; i < m; i++)
+        total_days += days[i];
     
-    return days;
+    // m월의 경우에는 정확이 d일만 있습니다.
+    total_days += d;
+    
+    return total_days;
 }
 
 int main() {
-    int m1, d1, m2, d2;
+    // 변수 선언 및 입력
+    int m1, m2, d1, d2;
     cin >> m1 >> d1 >> m2 >> d2;
-
-    // m1월 d1일이 월요일이면
-    string startDay = "Mon";
-    int startDayIndex = 1; // Mon corresponds to index 1
-
-    // 두 날짜 사이의 일 수 계산
-    int daysBetween = calculateDaysBetween(m1, d1, m2, d2);
-
-    // 목표 날짜의 요일 계산
-    int targetDayIndex = (startDayIndex + daysBetween) % 7;
-
-    // 결과 출력
-    cout << dayOfWeek[targetDayIndex] << endl;
-
+    
+    // 두 날짜간의 차이가 몇 일인지를 구합니다.
+    int diff = NumOfDays(m2, d2) - NumOfDays(m1, d1);
+    
+    // 음수인 경우에는, 양수로 넘겨 계산해주면 올바르게 계산이 됩니다. 
+    while(diff < 0)
+        diff += 7;
+    
+    // 알맞은 요일의 이름을 출력합니다.
+    string day_of_week[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    cout << day_of_week[diff % 7];
     return 0;
 }
