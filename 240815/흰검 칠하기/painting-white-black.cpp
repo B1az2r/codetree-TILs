@@ -1,55 +1,52 @@
 #include <iostream>
+
 using namespace std;
 
-class tile{
-    public:
-        char color;
-        int cnt_white;
-        int cnt_black;
-        tile(char color='n', int cnt_white=0, int cnt_black =0){
-            this->color = color;
-            this->cnt_white = cnt_white;
-            this->cnt_black = cnt_black;
-        }
-};
+#define MAX_K 100000
 
+int n;
+int a[2 * MAX_K + 1];
+int cnt_b[2 * MAX_K + 1];
+int cnt_w[2 * MAX_K + 1];
+int b, w, g;
 
 int main() {
-    int n, start;
+    // 변수 입력
     cin >> n;
-    tile tiles[10000];
-    start = 5000;
 
-    
-    for(int i=0;i<n;i++){
+    int cur = MAX_K;
+
+    for(int i = 1; i <= n; i++) {
         int x;
-        char op;
-        cin >> x >> op;
-        if(op=='L'){
-            for(int i=0;i<x;i++){
-                if(tiles[start-i].color=='g') continue;
-                tiles[start-i].color='w';
-                tiles[start-i].cnt_white++;
-                if(tiles[start-i].cnt_white>=2 && tiles[start-i].cnt_black>=2) tiles[start-i].color='g';
+        char c;
+        cin >> x >> c;
+        if(c == 'L') {
+            // x칸 왼쪽으로 칠합니다.
+            while(x--) {
+                a[cur] = 1;
+                cnt_w[cur]++;
+                if(x) cur--;
             }
-            start=start-x+1;
-        } else{
-            for(int i=0;i<x;i++){
-                if(tiles[start+i].color=='g') continue;
-                tiles[start+i].color='b';
-                tiles[start+i].cnt_black++;
-                if(tiles[start+i].cnt_black==2 && tiles[start+i].cnt_white>=2) tiles[start+i].color='g';
+        }
+        else {
+            // x칸 오른쪽으로 칠합니다.
+            while(x--) {
+                a[cur] = 2;
+                cnt_b[cur]++;
+                if(x) cur++;
             }
-            start=start+x-1;
         }
     }
-    int cnt_g=0,cnt_w=0,cnt_b=0;
-    for(int i=0;i<10000;i++){
-        if(tiles[i].color=='w') cnt_w++;
-        if(tiles[i].color=='g') cnt_g++;
-        if(tiles[i].color=='b') cnt_b++;
+
+    for(int i = 0; i <= 2 * MAX_K; i++) {
+        // 검은색과 흰색으로 두 번 이상 칠해진 타일은 회색입니다.
+        if(cnt_b[i] >= 2 && cnt_w[i] >= 2) g++;
+        // 그렇지 않으면 현재 칠해진 색깔이 곧 타일의 색깔입니다.
+        else if(a[i] == 1) w++;
+        else if(a[i] == 2) b++;
     }
 
-    cout << cnt_w << " " << cnt_b << " " << cnt_g;
+    // 정답을 출력합니다.
+    cout << w << " " << b << " " << g;
     return 0;
 }
