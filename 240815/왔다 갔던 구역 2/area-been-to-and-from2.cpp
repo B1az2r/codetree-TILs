@@ -2,41 +2,42 @@
 #include <string>
 using namespace std;
 
-const int OFFSET = 1000; // 배열 인덱스를 0 이상으로 만들기 위한 오프셋
-const int MAX_POS = 2000; // 최대 이동 가능 범위
+#define offset 1000
+#define range 2000
 
-int visited[MAX_POS] = {0};
+int visitied[range] = {0, };
 
-int main() {
+int main(){
+
     int n;
     cin >> n;
-
-    int position = OFFSET;
-
-    for (int i = 0; i < n; i++) {
+    int position = offset;
+    
+    for(int i = 0; i < n; i++){
         int x;
         char direction;
         cin >> x >> direction;
 
-        if (direction == 'L') {
-            for (int j = 0; j < x; j++) {
-                visited[--position]++;
+        if(direction == 'L'){
+            for(int j = 0; j < x; j++){
+                visitied[--position]++;
             }
-        } else if (direction == 'R') {
-            for (int j = 0; j < x; j++) {
-                visited[position++]++;
+        }
+        else if(direction == 'R'){
+            for(int j = 0; j < x; j++){
+                visitied[position++]++;
             }
         }
     }
 
-    int overlap_area = 0;
-    for (int i = 0; i < MAX_POS; i++) {
-        if (visited[i] >= 2) {
-            overlap_area++;
+    int area = 0;
+    for(int i = 0; i < range; i++){
+        if(visitied[i] >= 2){
+            area++;
         }
     }
 
-    cout << overlap_area << endl;
+    cout << area << endl;
 
     return 0;
 }
